@@ -24,7 +24,7 @@ git clone https://github.com/aws-samples/iam-identitycenter-identitystoreapi-ope
 
 ```
 
-## Test
+## Test `identitystore_operations.py`
 
 Here is an example to see all supported operations available in the sample script.
 
@@ -87,6 +87,52 @@ User :johndoe is a member of the following groups
 AWS_Data_Science
 AWS_Applied_Scientists
 ```
+
+## Test `identitystore_bulkoperations.py`
+
+Here is an example to see all supported bulk operations available in the sample script.
+
+```
+python identitystore_bulkoperations.py —h
+
+*Sample Output:*
+usage: identitystore_bulkoperations.py [-h] {create_users,delete_users} ...
+
+positional arguments:
+  {create_users,delete_users}
+
+options:
+  -h, --help            show this help message and exit
+
+```
+
+## AWS IAM Identity Center Bulk Operations
+
+Here is an example of how you can bulk create new users from a CSV file and add the user to an existing “AWS_Data_Science” Group.
+
+First prepare a csv file with the required fields:
+
+```
+username,givenname,familyname,groupname,email,emailtype,primary
+nina_franco,Nina,Franco,AWS_SSO_Data_Science,nina.franco@world.universe,work,TRUE
+john_smith,John,Smith,AWS_SSO_Data_Science,john.smith@world.universe,work,TRUE
+```
+
+The API supports creating with emails, which the script assumes are present in the CSV file.
+However the API does not yet support automatically sending verification emails.
+Once users are created you will need to go to the console and send the verification emails.
+
+```
+python identitystore_operations.py create_users --identitystoreid d-123456a7890 --identities_file IDENTITIES.csv
+
+*Sample Output:*
+User:nina_franco with UserId:12345678-3041-7026-18f3-be45837cd0e4 created successfully
+User:nina_franco added to Group:AWS_Data_Science successfully
+User:john_smith with UserId:94482488-3041-7026-18f3-be45837cd0e4 created successfully
+User:john_smith added to Group:AWS_Data_Science successfully
+```
+
+The `delete_users` example can be used to delete users, using the same IDENTITIES.csv, though this only requires, the usernames.
 
 ## Security
 
