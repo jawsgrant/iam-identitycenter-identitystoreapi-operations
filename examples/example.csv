@@ -1,0 +1,3 @@
+username,givenname,familyname,groupname,email,emailtype,primary
+nina_franco,Nina,Franco,AWS_SSO_Data_Science,nina.franco@world.universe,work,TRUE
+john_smith,John,Smith,AWS_SSO_Data_Science,john.smith@world.universe,work,TRUE

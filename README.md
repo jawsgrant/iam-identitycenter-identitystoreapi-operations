@@ -110,7 +110,7 @@ options:
 
 Here is an example of how you can bulk create new users from a CSV file and add the user to an existing “AWS_Data_Science” Group.
 
-First prepare a csv file with the required fields:
+First prepare a csv file with your identities as in [example csv file](examples/example.csv) with the required fields:
 
 ```
 username,givenname,familyname,groupname,email,emailtype,primary
@@ -122,8 +122,13 @@ The API supports creating with emails, which the script assumes are present in t
 However the API does not yet support automatically sending verification emails.
 Once users are created you will need to go to the console and send the verification emails.
 
+Identity store allows you to specify multiple emails for each user.
+The example script enables you to specify a single email per user.
+The email type is a string, in the example defaulting to `work`, while primary is a binary field and must be `TRUE` or `FALSE`.
+If you want to use the email to verify users, ensure primary is `TRUE`.
+
 ```
-python identitystore_operations.py create_users --identitystoreid d-123456a7890 --identities_file IDENTITIES.csv
+python identitystore_bulkoperations.py create_users --identitystoreid d-123456a7890 --identities_file IDENTITIES.csv
 
 *Sample Output:*
 User:nina_franco with UserId:12345678-3041-7026-18f3-be45837cd0e4 created successfully
